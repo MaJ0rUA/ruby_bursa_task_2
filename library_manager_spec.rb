@@ -1,12 +1,4 @@
-require 'active_support/all'
-require 'pry'
-
 require './library_manager.rb'
-require './author.rb'
-require './book.rb'
-require './published_book.rb'
-require './reader.rb'
-require './reader_with_book.rb'
 
 describe LibraryManager do
 
@@ -18,23 +10,26 @@ describe LibraryManager do
 
   it 'should count penalty' do
     manager.penalty
+    expect(manager.penalty).to eq 784.224
   end
 
   it 'should know if author can meet another author' do
-    manager.could_meet_each_other? leo_tolstoy, oscar_wilde
+      res = manager.could_meet_each_other? leo_tolstoy, oscar_wilde
+    expect(res).to eq true
   end  
 
   it 'should count days to buy' do
-    manager.days_to_buy
+    expect(manager.days_to_buy).to eq 4
   end
 
   it 'should transliterate ukrainian names' do
-    ukrainan_author = Author.new(1856, 1916, 'Іван Франко')
-    manager.transliterate ukrainan_author
+    ukrainian_author = Author.new(1856, 1916, 'Іван Франко')
+    #manager.transliterate ukrainian_author
+    expect(manager.transliterate ukrainian_author).to eq "Ivan Franko"
   end
 
   it 'should count penalty to finish' do
-    manager.penalty_to_finish
+    expect (manager.penalty_to_finish).to eq 2236.962
   end
 
   
